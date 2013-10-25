@@ -35,16 +35,22 @@ class SimplyTappOAuth {
   /* Immediately retry the API call if the response was not successful. */
   //public $retry = TRUE;
 
-//?scope=CARD_OWNER&userapp_id='.$cgi->param('USERAPP').'&brand_id=10
-
-
   /**
    * Set API URLS
    */
   function accessTokenURL()  { return 'https://www.simplytapp.com/accounts/OAuthGetAccessToken'; }
   function authenticateURL() { return 'https://www.simplytapp.com/accounts/OAuthAuthorizeToken'; }
   function authorizeURL()    { return 'https://www.simplytapp.com/accounts/OAuthAuthorizeToken'; }
-  function requestTokenURL() { return 'https://www.simplytapp.com/accounts/OAuthGetRequestToken?scope=CARD_OWNER'; }
+  function requestTokenURL() { 
+    if(isset($_COOKIE['custombrand']))
+    { 
+  	  return 'https://www.simplytapp.com/accounts/OAuthGetRequestToken?scope=CARD_OWNER&brand_id='.$_COOKIE['custombrand']; 
+  	}
+  	else
+  	{
+  	  return 'https://www.simplytapp.com/accounts/OAuthGetRequestToken?scope=CARD_OWNER'; 
+  	}
+  }
 
   /**
    * Debug helpers

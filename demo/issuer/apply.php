@@ -27,7 +27,7 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
  			<legend>GENERAL INFORMATION</legend>
  			<div class="marginright">';
  			
- 			if((isset($_COOKIE['customappkey'])) && (isset($_COOKIE['customappsecret']))){
+ 			if((isset($_COOKIE['customappkey'])) || (isset($_COOKIE['customappsecret'])) || (isset($_COOKIE['custombrand']))){
  				echo '<a href="delcookies.php">Click here to clear issuer settings</a>';
  			}
  			else{
