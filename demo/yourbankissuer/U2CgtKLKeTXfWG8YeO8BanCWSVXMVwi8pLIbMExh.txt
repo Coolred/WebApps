@@ -1,0 +1,23 @@
+#card manager
+/card
+auth
+
+#change the keys to the security domain
+put-key -m add 1/1/DES/ffffffffffffffffffffffffffffffff 1/2/DES/ffffffffffffffffffffffffffffffff 1/3/DES/ffffffffffffffffffffffffffffffff
+
+#delete applets if they are already there
+delete -r a0000000031010
+delete -r 325041592e5359532e4444463031
+
+#install the applets
+install -i a0000000031010 -q C9#() 636f6d2e7374 436172644170706c6574
+install -i 325041592e5359532e4444463031 -q C9#() 636f6d2e7374 5070736532506179
+
+#perso
+/select a0000000031010
+/send 00e20000134046461157362346D16121210000094700000F00
+
+/atr
+/select 325041592e5359532e4444463031
+/select a0000000031010
+        
