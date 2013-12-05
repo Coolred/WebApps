@@ -49,6 +49,6 @@ try {
     $log = $ex->getMessage() . "\n" . $ex->getTraceAsString();
     error_log($log, 0);
 
-    header('Location: issuerKeyError.html');
+    header('Location: requestTokenError.html');
 }
 ?>

@@ -150,7 +150,7 @@
     </div>
 
     <fieldset id="tokeInfoFieldset">
-        <legend>Personalization OAuth Tokens</legend>
+        <legend>OAuth Request Tokens</legend>
         <table id="authTokenTable">
             <tr>
                 <th>OAuth Token:</th>
