@@ -2,8 +2,9 @@
 
 session_start();
 $_SESSION['CALLBACK'] = $_GET['CALLBACK'];
+?>
 
-echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -25,42 +26,42 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
  		<form>
  			<fieldset>
  			<legend>GENERAL INFORMATION</legend>
- 			<div class="marginright">';
- 			
+ 			<div class="marginright">
+ 		
+                        <?php	
  			if((isset($_COOKIE['customappkey'])) || (isset($_COOKIE['customappsecret'])) || (isset($_COOKIE['custombrand']))){
  				echo '<a href="delcookies.php">Click here to clear issuer settings</a>';
  			}
  			else{
  				echo '<input type="button" value="Issuers, configure here" onclick="location.href=\'customissuer.php\';">';
  			}
+                        ?>
 
- 			echo '</div>
+ 			</div>
  			<div class="marginleft">
- 			<div class="center"><h6>For demo purposes. No information inputted in fields below will be saved.</h6></div>
+ 			<div class="center"><h6>Input fields are for demo purposes. You do not need to edit them.</h6></div>
 			<br />
-			First Name: <input type="text" name="firstname"><br />
-			Last Name: <input type="text" name="lastname"><br />
-			Email: <input type="text" name="email"><br />
-			Phone Number: <input type="text" name="phone"><br />
-			Billing Address (Line 1): <input type="text" name="address1"><br />
-			Billing Address (Line 2): <input type="text" name="address2"><br />
-			City: <input type="text" name="city"><br /> State: <input type="text" name="state"><br /> Zip Code: <input type="text" name="zip"><br />
-			Country: <input type="text" name="country"><br />
+			First Name: <input type="text" name="firstname" value="John" size="8" disabled><br />
+			Last Name: <input type="text" name="lastname" value="Smith" size="10" disabled><br />
+			Email: <input type="text" name="email" value="john.smith@example.com" size="30" disabled><br />
+			Phone Number: <input type="text" name="phone" value="+1-512-555-1234" disabled><br />
+			Billing Address: <input type="text" name="address1" value="678 Applier Lane" disabled><br />
+			City: <input type="text" name="city" value="Austin" size="10" disabled><br /> 
+                        State: <input type="text" name="state" value="TX" size="4" disabled><br /> 
+                        Zip Code: <input type="text" name="zip" value="78701" size="8" disabled><br />
 			</div>
 			</fieldset><br>
 			<fieldset>
  			<legend>Employment</legend>
  			<div class="marginleft">
- 			<div class="center"><h6>For demo purposes. No information inputted in fields below will be saved.</h6></div>
-			<br />
-			Current Employer: <input type="text" name="employer"><br />
-			Work Phone Number: <input type="text" name="workphone"><br />
-			Annual Income: <input type="text" name="income"><br />
+			Current Employer: <input type="text" name="employer" value="Big Mart" disabled><br />
+			Work Phone Number: <input type="text" name="workphone" value="+1-512-555-4321" disabled><br />
+			Annual Income: <input type="text" name="income" value="$40000" size="8" disabled><br />
 			</div>
 			</fieldset>
  			<div class="marginleft">
-			<h6>Card application will be sent upon clicking Apply</h6>
-			<input type="button" value="Apply" onclick="location.href=\'perso.php\';">
+			<h6>Click apply to send card application</h6>
+			<input type="button" value="Apply" onclick="location.href='perso.php';">
 			</div>
 		</form>
 	</div>
@@ -68,6 +69,4 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 
 </body>
 
-</html>';
-
-?>
+</html>
