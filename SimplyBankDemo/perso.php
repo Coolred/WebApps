@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <?php
     session_start();
-    $oauth_token = isset($_SESSION['oauth_token']) ? $_SESSION['oauth_token'] : "NO_VALUE";
-    $oauth_token_secret = isset($_SESSION['oauth_token_secret']) ? $_SESSION['oauth_token_secret'] : "NO_VALUE";
+    $access_token = isset($_SESSION['access_token']) ? $_SESSION['access_token'] : "NO_VALUE";
+    $access_token_secret = isset($_SESSION['access_token_secret']) ? $_SESSION['access_token_secret'] : "NO_VALUE";
 ?>
 <html>
 <head>
@@ -153,12 +153,12 @@
         <legend>OAuth Request Tokens</legend>
         <table id="authTokenTable">
             <tr>
-                <th>OAuth Token:</th>
-                <td><?php echo $oauth_token; ?></td>
+                <th>OAuth Access Token:</th>
+                <td><?php echo $access_token; ?></td>
             </tr>
             <tr>
-                <th>OAuth Token Secret:</th>
-                <td><?php echo $oauth_token_secret; ?></td>
+                <th>OAuth Access Token Secret:</th>
+                <td><?php echo $access_token_secret; ?></td>
             </tr>
         </table>
     </fieldset>

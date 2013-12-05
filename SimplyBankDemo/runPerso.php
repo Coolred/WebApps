@@ -6,30 +6,16 @@
         return isset($_SESSION[$varname]) ? 
             $_SESSION[$varname] : (strtoupper($varname)."_IS_UNDEFINED");     
     } 
-    
-    $oauth_token = get_session_var('oauth_token');
-    $oauth_token_secret = get_session_var('oauth_token_secret');    
+        
     $issuer_key = get_session_var('issuer_key');
     $issuer_secret = get_session_var('issuer_secret');   
-    $access_token = "ACCESS_TOKEN_IS_UNDEFINED";
-    $access_token_secret = "ACCESS_TOKEN_SECRET_IS_UNDEFINED";
-        
-    try {
-        $oauth = new OAuth($issuer_key, $issuer_secret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
-        $oauth->enableDebug();
-	$access_token_info = $oauth->getAccessToken("https://www.simplytapp.com/accounts/OAuthGetAccessToken");
-        
-        $access_token = $access_token_info['oauth_token'];
-        $access_token_secret = $access_token_info['oauth_token_secret'];
-
-    } catch(OAuthException $E) {
-        die($E->lastResponse);
-    }
+    $access_token = get_session_var('access_token');
+    $access_token_secret = get_session_var('access_token_secret');
     
-    if(isset($_POST['script'])) {
+    if(isset($_SESSION['script'])) {
         $tmpfname = tempnam("./jar", "script");
         $handle = fopen($tmpfname, "w");
-        fwrite($handle, $_POST['script']);
+        fwrite($handle, $_SESSION['script']);
         fclose($handle);
 
         $command = "java -jar ./STBridge.jar -ck $issuer_key -cs $issuer_secret"
@@ -42,7 +28,7 @@
                 
         unlink($tmpfname);
     } else {
-        $script_output = "No 'script' passed in as POST\nparameter to run";
+        $script_output = "No GPJ script available to run";
     }  
 ?>
 
@@ -60,6 +46,11 @@
         
         fieldset {
             margin: 1em;
+        }
+        
+        legend {
+            padding-left: 0.5em;
+            padding-right: 0.5em;
         }
         
         #authTokenTable {
@@ -88,14 +79,6 @@
         <div class="marginleft">
             <table id="authTokenTable">
                 <tr>
-                    <th>OAuth Request Token:</th>
-                    <td><?php echo $oauth_token; ?></td>
-                </tr>
-                <tr>
-                    <th>OAuth Request Token Secret:</th>
-                    <td><?php echo $oauth_token_secret; ?></td>
-                </tr>
-                <tr>
                     <th>OAuth Access Token:</th>
                     <td><?php echo $access_token; ?></td>
                 </tr>
@@ -112,7 +95,7 @@
         <pre><?php echo $script_output; ?></pre>
     </fieldset>
 
-    <form action="apply.html" method="GET">
+    <form action="apply.html">
         <button type="submit">Start again</button>
     </form>
 
