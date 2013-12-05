@@ -94,22 +94,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src="perso.js"></script>
 </head>
-
+    
 <body>
-<img src="simplybank.png"/>
-
-<div id="top">
+    <img src="simplybank.png"/>
+              
     <h2>Personalize Card</h2>
-</div>
-<div id="form">
-
+            
     <div id="tabs">
-
+        
         <ul>
             <li><a href="#tabs-1">Visa Swipe-Yours</a></li>
             <li><a href="#tabs-2">PayPass with Test Credential</a></li>
         </ul>
-
+            
         <div id="tabs-1">
             <h5>
                 Enter swiped data of your own Visa card in-full or just the track 2 portion. Hit go and
@@ -119,36 +116,36 @@
             <h6 id="exampleSwipeData">
                 %B4046460664629718^000NETSPEND^161012100000181000000?;4046460664629718=16101210000018100000?
             </h6>
-
+                
             <div id="swipeInputContainer">
                 <span><input id="swipeInput" type="text"></span>
                 <button id="track2ConvertButton">Go</button>
             </div>
             <form id="swipeYoursForm" action="runPerso.php" method="post">
-
+                
                 <textarea name="script" id="swipeYoursScript"
-                    class="personalizationScript"><?php include("SwipeYoursPersonalize.scr"); ?></textarea>
+                          class="personalizationScript"><?php include("SwipeYoursPersonalize.scr"); ?></textarea>
                 <div class="submitResetContainer">
                     <button type="submit" id="swipeYoursSubmit">Personalize Card</button>
                     <button type="reset" id="swipeYoursReset">Reset</button>
                 </div>
             </form>
         </div>
-
+            
         <div id="tabs-2">
             <h5>Use this personalize a well-known test credential for PayPass Mastercard:</h5>
             <form id="payPassForm" action="postscript.php" method="post">
-               <textarea name="script" id="payPassScript" class="personalizationScript"
-                    class="personalizationScript"><?php include("PayPassPersonalize.scr"); ?></textarea>
-               <div class="submitResetContainer">
-                   <button type="submit" id="payPassSubmit">Personalize Card</button>
-                   <button type="reset" id="payPassReset">Reset</button>
-               </div>
+                <textarea name="script" id="payPassScript" class="personalizationScript"
+                          class="personalizationScript"><?php include("PayPassPersonalize.scr"); ?></textarea>
+                <div class="submitResetContainer">
+                    <button type="submit" id="payPassSubmit">Personalize Card</button>
+                    <button type="reset" id="payPassReset">Reset</button>
+                </div>
             </form>
         </div>
-
+            
     </div>
-
+        
     <fieldset id="tokeInfoFieldset">
         <legend>OAuth Request Tokens</legend>
         <table id="authTokenTable">
@@ -162,10 +159,11 @@
             </tr>
         </table>
     </fieldset>
-</div>
-
-<noscript>
-    Your web browser must have JavaScript enabled for this page to display correctly.
-</noscript>
-
+        
+        
+    <noscript>
+        Your web browser must have JavaScript enabled for this page to display correctly.
+    </noscript>
+        
 </body>
+    

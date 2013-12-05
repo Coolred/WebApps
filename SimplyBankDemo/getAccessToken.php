@@ -18,6 +18,8 @@ if (!isset($_GET['oauth_verifier'])) {
     exit;
 }
 
+$oauth_verifier = $_GET['oauth_verifier'];
+
 if ($request_token != $_GET['oauth_token']) {
     error_log("session/callback token mismatch: session: $request_token, request: $_GET[oauth_token]");
     header('Location: accessTokenError.html');
@@ -27,6 +29,10 @@ if ($request_token != $_GET['oauth_token']) {
 try {
     $oauth = new OAuth($issuer_key, $issuer_secret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
     $oauth->enableDebug();
+
+    error_log("getAccessToken: issuer_key=$issuer_key, issuer_secret=$issuer_secret," .
+              " request_token=$request_token, request_token_secret=$request_token_secret," .
+              " oauth_verifier=$oauth_verifier");
     $oauth->setToken($request_token, $request_token_secret);
     
     $access_url = "https://www.simplytapp.com/accounts/OAuthGetAccessToken";

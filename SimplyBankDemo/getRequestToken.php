@@ -1,4 +1,12 @@
 <?php
+/*
+ * Get's the OAuth request tokens and redirects to SimplyTapp's website for 
+ * authorization.  When authorized, if the issuer callback is configured correctly,
+ * the SimplyTapp website will redirect to getAccessToken.php.
+ */
+
+$req_url = 'https://www.simplytapp.com/accounts/OAuthGetRequestToken?scope=CARD_OWNER';
+
 //
 // Default to Swipe Yours Issuer Key and Secret.  This issuer is currently located in
 // doug@simplytapp.com's account.
@@ -39,7 +47,6 @@ $oauth = new OAuth($issuer_key, $issuer_secret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH
 $oauth->enableDebug();
 
 try {
-    $req_url = 'https://www.simplytapp.com/accounts/OAuthGetRequestToken?scope=CARD_OWNER';
     $request_token_info = $oauth->getRequestToken($req_url);
 
     $request_token = $request_token_info['oauth_token'];
