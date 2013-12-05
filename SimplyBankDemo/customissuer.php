@@ -14,7 +14,7 @@
  	<img src="images/simplybank.png" class="logo" height="55px" width="260px" />
 
  	<div id="top">
- 		<h1>Issuer OAuth Configuration</h1>
+ 		<h1>Issuer OAuth Cofiguration</h1>
  	</div>
  	<div id="form">
  		<form action="appconfig.php" method="post">
@@ -23,9 +23,9 @@
  			<div class="marginleft">
  			<div class="center"><h6>For demo purposes. No information inputted in fields below will be saved.</h6></div>
 			<br />
-			Issuer Key: <input type="text" name="appkey" class="customissuer"><br />
-			Issuer Secret: <input type="text" name="appsecret" class="customissuer"><br />
-			(Optional) Card Brand: <input type="text" name="cardbrand" class="customissuer"><br />
+			Application Key: <input type="text" name="appkey"><br />
+			Application Secret: <input type="text" name="appsecret"><br />
+			(Optional) Card Brand: <input type="text" name="cardbrand"><br />
 			</div>
 			</fieldset><br>
  			<div class="marginleft">
