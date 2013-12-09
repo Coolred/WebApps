@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+    session_start();
+    $request = ($_SERVER['REQUEST_METHOD'] == 'GET') ? $_GET : $_POST;
+    if(isset($request['CALLBACK'])) {
+        $_SESSION['CALLBACK'] = $request['CALLBACK'];
+        error_log("Callback is $_SESSION[CALLBACK]", 0);
+    }
+?>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
