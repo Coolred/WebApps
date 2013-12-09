@@ -40,6 +40,14 @@
             error_log("We just ran STBridge command with no output: $command");
         }
     }
+    
+    $finishButtonText = "Start New Application";
+    $finishButtonAction = "apply.php";
+    if(isset($_SESSION['CALLBACK'])) {
+        $finishButtonText = "Return";
+        $finishButtonAction = $_SESSION['CALLBACK'];
+    }
+    
 ?>
 
 <html lang="en">
@@ -116,8 +124,8 @@
         <code class="commandOutput"><?php echo $script_output; ?></code>
     </fieldset>
 
-    <form action="apply.html">
-        <button type="submit">Start New Application</button>
+    <form action="<?php echo $finishButtonAction;?>">
+        <button type="submit"><?php echo $finishButtonText?></button>
     </form>
 
 </body>
