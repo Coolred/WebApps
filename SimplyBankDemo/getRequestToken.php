@@ -60,10 +60,6 @@ try {
     $auth_url = "https://www.simplytapp.com/accounts/OAuthAuthorizeToken?oauth_token=$request_token";
     
     header("Location: $auth_url");
-    exit;
-       
-    //$oauth->setToken($request_token, $request_token_secret);
-    //$access_token_info = $oauth->getAccessToken($access_url);
 
 } catch(OAuthException $ex) {
     $log = $ex->getMessage() . "\n" . $ex->getTraceAsString();

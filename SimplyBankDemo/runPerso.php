@@ -12,10 +12,14 @@
     $access_token = get_session_var('access_token');
     $access_token_secret = get_session_var('access_token_secret');
     
-    if(isset($_SESSION['script'])) {
+    $script_input = "No GPJ script provided";
+    $script_output = "No output available";
+    
+    if(isset($_POST['script'])) {
+        $script_input = $_POST['script'];
         $tmpfname = tempnam("./jar", "script");
         $handle = fopen($tmpfname, "w");
-        fwrite($handle, $_SESSION['script']);
+        fwrite($handle, $script_input);
         fclose($handle);
 
         $command = "java -jar ./STBridge.jar -ck $issuer_key -cs $issuer_secret"
@@ -24,12 +28,18 @@
         
         error_log("about to run command: $command", 0);
         chdir('./jar');
-        $script_output = exec($command) or die("failed to execute: $command");
-                
-        unlink($tmpfname);
-    } else {
-        $script_output = "No GPJ script available to run";
-    }  
+        
+        $script_output = array();
+        $return_val = null;
+        exec($command, $script_output, $return_val);
+        if ($script_output) {
+            // convert array to string
+            $script_output = implode(PHP_EOL, $script_output);
+        } else {
+            unlink($tmpfname);
+            error_log("We just ran STBridge command with no output: $command");
+        }
+    }
 ?>
 
 <html lang="en">
@@ -68,6 +78,12 @@
         #authTokenTable td {
             text-align: left;
         }
+        
+        .commandOutput {
+            display: inline-block;
+            text-align: left;
+            white-space: pre-wrap;
+        }
     </style>
 </head>
 
@@ -89,10 +105,15 @@
             </table>
         </div>
     </fieldset>
-
+    
     <fieldset>
-        <legend>SCRIPT RESULT</legend>
-        <pre><?php echo $script_output; ?></pre>
+        <legend>GPJ Input Script</legend>
+        <code class="commandOutput"><?php echo $script_input; ?></code>
+    </fieldset>
+    
+    <fieldset>
+        <legend>GPJ Output</legend>
+        <code class="commandOutput"><?php echo $script_output; ?></code>
     </fieldset>
 
     <form action="apply.html">
