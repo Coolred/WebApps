@@ -88,7 +88,10 @@
         .submitResetContainer {
             margin-top: 0.6em;
         }
-
+        
+        .track2 {
+            color: darkblue;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -109,17 +112,22 @@
             
         <div id="tabs-1">
             <h5>
-                Enter swiped data of your own Visa card in-full or just the track 2 portion. Hit go and
-                we'll display the GPJ personalization script. If you need some test swipe data to understand how
-                this page works you can use this:
+                Enter the swiped magstripe data of your own Visa card in-full or just the
+                <span class="track2">track 2 portion</span>. Hit "Modify Script" and we'll
+                customize the GPJ script with your card info. If you just need a test
+                card with no funds on it, you can use this:
             </h5>
             <h6 id="exampleSwipeData">
-                %B4046460664629718^000NETSPEND^161012100000181000000?;4046460664629718=16101210000018100000?
+                %B4046460664629718^000NETSPEND^161012100000181000000?<span class="track2">;4046460664629718=16101210000018100000?</span>
             </h6>
+            <h5>
+                If you have no further script changes after adding your card's swipe data,
+                hit "Personalize Card".
+            </h5>
                 
             <div id="swipeInputContainer">
                 <span><input id="swipeInput" type="text"></span>
-                <button id="track2ConvertButton">Go</button>
+                <button id="track2ConvertButton">Modify&nbsp;Script</button>
             </div>
             <form id="swipeYoursForm" action="runPerso.php" method="post">
                 
