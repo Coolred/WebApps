@@ -117,7 +117,7 @@
     </fieldset>
 
     <form action="apply.html">
-        <button type="submit">Start again</button>
+        <button type="submit">Start New Application</button>
     </form>
 
 </body>
