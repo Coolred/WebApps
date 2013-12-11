@@ -8,8 +8,9 @@
 $req_url = 'https://www.simplytapp.com/accounts/OAuthGetRequestToken?scope=CARD_OWNER';
 
 //
-// Default to Swipe Yours Issuer Key and Secret.  This issuer is currently located in
-// doug@simplytapp.com's account.
+// Default to SwipeYours Issuer Key and Secret.  This is a special issuer
+// open to any user.  Normally, you would not publish issuer keys in an
+// open GitHub repository.
 //
 $issuer_key = 'WaeQ08x0LrhzvGJdPZcBK67LdJH6aKVOjICpReGz';
 $issuer_secret = '3kREFUqcMoaJWVLmbi9OTR8tZpGSlGt457aFCWXt';
