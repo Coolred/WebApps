@@ -142,7 +142,7 @@
             
         <div id="tabs-2">
             <h5>Use this personalize a well-known test credential for PayPass Mastercard:</h5>
-            <form id="payPassForm" action="postscript.php" method="post">
+            <form id="payPassForm" action="runPerso.php" method="post">
                 <textarea name="script" id="payPassScript" class="personalizationScript"
                           class="personalizationScript"><?php include("PayPassPersonalize.scr"); ?></textarea>
                 <div class="submitResetContainer">
