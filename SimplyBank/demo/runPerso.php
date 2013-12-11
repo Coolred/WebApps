@@ -41,11 +41,11 @@
         }
     }
     
-    $finishButtonText = "Start New Application";
-    $finishButtonAction = "apply.php";
+    $finishedButtonText = "Start New Application";
+    $finishedButtonAction = "apply.php";
     if(isset($_SESSION['CALLBACK'])) {
-        $finishButtonText = "Return";
-        $finishButtonAction = $_SESSION['CALLBACK'];
+        $finishedButtonText = "Return";
+        $finishedButtonAction = $_SESSION['CALLBACK'];
     }
     
 ?>
@@ -124,9 +124,10 @@
         <code class="commandOutput"><?php echo $script_output; ?></code>
     </fieldset>
 
-    <form action="<?php echo $finishButtonAction;?>">
-        <button type="submit"><?php echo $finishButtonText?></button>
-    </form>
+    <button id="finishedButton" type="button"
+            onclick="location.href='<?php echo $finishedButtonAction; ?>';">
+        <?php echo $finishedButtonText?>
+    </button>
 
 </body>
 
