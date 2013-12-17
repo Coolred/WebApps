@@ -85,13 +85,19 @@
         
         #authTokenTable td {
             text-align: left;
+            word-break: break-all;
         }
         
-        .commandOutput {
+        .commandOutput, .inputScript {
             display: inline-block;
             text-align: left;
             white-space: pre-wrap;
         }
+        
+        .inputScript {
+            word-break: break-all;
+        }
+        
     </style>
 </head>
 
@@ -116,7 +122,7 @@
     
     <fieldset>
         <legend>GPJ Input Script</legend>
-        <code class="commandOutput"><?php echo $script_input; ?></code>
+        <code class="inputScript"><?php echo $script_input; ?></code>
     </fieldset>
     
     <fieldset>
