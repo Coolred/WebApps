@@ -153,17 +153,17 @@
         </div>
         <div>
             <label>Application Key:
-                <input type="text" name="issuer_oauth_key" size="55" disabled>
+                <input type="text" name="issuer_key" size="55" disabled>
             </label>
         </div>
         <div>
             <label>Application Secret:
-                <input type="text" name="issuer_oauth_secret" size="55" disabled>
+                <input type="text" name="issuer_secret" size="55" disabled>
             </label>
         </div>
         <div>
             <label>Card Brand:
-                <input type="number" name="cardbrand" disabled>
+                <input type="number" name="issuer_brand_id" disabled>
             </label>
         </div>
         <div class="customIssuerOnly">
