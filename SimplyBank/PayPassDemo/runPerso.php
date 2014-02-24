@@ -47,7 +47,27 @@
         $finishedButtonText = "Return";
         $finishedButtonAction = $_SESSION['CALLBACK'];
     }
-    
+
+    /*
+     * OAuth API notifiy request.  Right now we're just testing this and logging
+     * the result.
+     */
+    $api_url = "https://www.simplytapp.com/accounts/Api";
+    $jsonFields = array('DATA' => '{"command": "Notify", "message": "Testing Google Cloud Messaging from PayPassDemo apply pages."}');
+
+    $oauth = new OAuth($issuer_key, $issuer_secret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
+    $oauth->enableDebug();
+
+    try {
+        $oauth->setToken($access_token, $access_token_secret);      
+        $oauth->fetch($api_url, $jsonFields, OAUTH_HTTP_METHOD_POST);
+        $notify_response = htmlspecialchars(var_export($oauth->getLastResponse(), true));
+        
+    } catch(OAuthException $ex) {
+        $log = $ex->getMessage() . "\n" . $ex->getTraceAsString();
+        error_log($log, 0);
+        $notify_response = "API REQUEST FAILED";
+    }
 ?>
 
 <html lang="en">
@@ -98,7 +118,6 @@
         #inputScript {
             word-break: break-all;
         }
-        
     </style>
 </head>
 
@@ -131,6 +150,11 @@
         <code class="commandOutput"><?php echo $script_output; ?></code>
     </fieldset>
 
+    <fieldset>
+        <legend>Notify API Request Response</legend>
+        <code class="commandOutput"><?php echo $notify_response; ?></code>
+    </fieldset>    
+    
     <button id="finishedButton" type="button"
             onclick="location.href='<?php echo $finishedButtonAction; ?>';">
         <?php echo $finishedButtonText?>

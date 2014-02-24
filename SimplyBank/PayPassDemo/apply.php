@@ -11,7 +11,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Generic Bank Card Application</title>
+    <title>Payment Credentials Application</title>
     <style>
         body {
             text-align: center;
@@ -68,36 +68,14 @@
             padding-left: 0.5em;
             color: red;
         }
-        
-        /* next two are only used by jQuery */
-        .swipeYoursIssuerOnly {}
-        .customIssuerOnly {}
+
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script>
-        $(function() {
-            $("#form").validate();
-
-            $("#useCustomIssuerButton").click(function(){
-                $(".swipeYoursIssuerOnly").hide();
-                $(".customIssuerOnly input").removeAttr('disabled').attr('required', '');
-                $(".customIssuerOnly").show();
-            });
-
-            $("#useSwipeYoursButton").click(function(){
-                $(".customIssuerOnly").hide();
-                $(".customIssuerOnly input").removeAttr('required').attr('disabled', '');
-                $(".swipeYoursIssuerOnly").show();
-            });
-
-        });
-    </script>
 </head>
 
 <body>
 <img src="/img/simplybank.png"/>
-<h2>APPLY FOR A CARD</h2>
+<h2>Apply for PayPass Mobile</h2>
     
 <form id="form" action="getRequestToken.php" method="get">
     
@@ -138,37 +116,6 @@
         </div>
         <div>
             <label>Annual Income: <input type="text" name="income" value="$40000" size="8" disabled></label>
-        </div>
-    </fieldset>
-    <div class="swipeYoursIssuerOnly">
-        <button type="button" id="useCustomIssuerButton">Custom Issuer &darr;</button> You are using SimplyBank's SwipeYours Issuer, but can configure
-        your own.
-    </div>
-    <fieldset class="customIssuerOnly" id="oauthFieldsSection">
-        <legend>Issuer OAuth Configuration (values from Issuer section</legend>
-        <div class="center">
-            <div class="swipeYoursIssuerOnly fieldsetHint">You are using SimplyBank's SwipeYours Issuer</div>
-            <div class="customIssuerOnly fieldsetHint">Copy the values from the Issuer section of your
-                SimplyTapp account
-            </div>
-        </div>
-        <div>
-            <label>Application Key:
-                <input type="text" name="issuer_key" size="55" disabled>
-            </label>
-        </div>
-        <div>
-            <label>Application Secret:
-                <input type="text" name="issuer_secret" size="55" disabled>
-            </label>
-        </div>
-        <div>
-            <label>Card Brand:
-                <input type="number" name="issuer_brand_id" disabled>
-            </label>
-        </div>
-        <div class="customIssuerOnly">
-            <button id="useSwipeYoursButton" type="button">Hide and use SwipeYours Issuer &uarr;</button>
         </div>
     </fieldset>
         

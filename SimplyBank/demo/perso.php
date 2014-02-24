@@ -68,6 +68,7 @@
         
         #authTokenTable td {
             text-align: left;
+            word-break: break-all;
         }
 
         #swipeInputContainer {
@@ -100,7 +101,7 @@
 </head>
     
 <body>
-    <img src="simplybank.png"/>
+    <img src="/img/simplybank.png"/>
               
     <h2>Personalize Card</h2>
             

@@ -4,44 +4,18 @@
  * authorization.  When authorized, if the issuer callback is configured correctly,
  * the SimplyTapp website will redirect to getAccessToken.php.
  */
+$issuer_key = 'OrLTYybfhpZNU2URBdrRuaN1jLloE3CZw4EuK73Y';
+$issuer_secret = 'WFeARTwRdTCjsVCucIHll6o6DMDgQ3TW5IjuPwvN';
+$issuer_brand_id = '85';
 
-$req_token_url = 'https://www.simplytapp.com/accounts/OAuthGetRequestToken?scope=CARD_OWNER';
-
-//
-// Default to SwipeYours Issuer Key and Secret.  This is a special issuer
-// open to any user.  Normally, you would not publish issuer keys in an
-// open GitHub repository.
-//
-$issuer_key = 'WaeQ08x0LrhzvGJdPZcBK67LdJH6aKVOjICpReGz';
-$issuer_secret = '3kREFUqcMoaJWVLmbi9OTR8tZpGSlGt457aFCWXt';
-$issuer_brand_id = '56';
+$req_token_url = "https://www.simplytapp.com/accounts/OAuthGetRequestToken?scope=CARD_OWNER&brand_id=$issuer_brand_id";
 
 session_start();
-$request = ($_SERVER['REQUEST_METHOD'] == 'GET') ? $_GET : $_POST;
 
 unset($_SESSION['issuer_key']);
 unset($_SESSION['issuer_secret']);
 unset($_SESSION['access_token']);
 unset($_SESSION['access_token_secret']);
-
-
-//
-//  Override the SwipeYours issuer key/secret with custom values if they were
-//  given to us:
-//
-if(isset($request['issuer_key']) && isset($request['issuer_secret']) && isset($request['issuer_brand_id'])) {
-    // sanitize user input to prevent XSS attacks
-    $issuer_key = preg_replace("/[^A-Za-z0-9]/", '', $request['issuer_key']);
-    $issuer_secret = preg_replace("/[^A-Za-z0-9]/", '', $request['issuer_secret']);
-    $issuer_brand_id = preg_replace("/[^0-9]/", '', $request['issuer_brand_id']);
-}
-
-$_SESSION['issuer_key'] = $issuer_key;
-$_SESSION['issuer_secret'] = $issuer_secret;
-$req_token_url .= "&brand_id=$issuer_brand_id";
-
-error_log("Using: issuer_key=$issuer_key issuer_secret=$issuer_secret issuer_brand_id=$issuer_brand_id url=$req_token_url", 0);
-
 
 $oauth = new OAuth($issuer_key, $issuer_secret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
 $oauth->enableDebug();
@@ -54,6 +28,8 @@ try {
 
     error_log("retrieved: request_token=$request_token, request_token_secret=$request_token_secret", 0);
            
+    $_SESSION['issuer_key'] = $issuer_key;
+    $_SESSION['issuer_secret'] = $issuer_secret;
     $_SESSION['request_token'] = $request_token;
     $_SESSION['request_token_secret'] = $request_token_secret;
     
