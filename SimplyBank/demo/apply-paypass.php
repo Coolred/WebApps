@@ -7,9 +7,9 @@
     //
     IssuerConfig::init(
         "PayPass", 
-        "ISSUER_KEY", 
-        "ISSUER_SECRET",
-        "BRAND_ID",
+        "WaeQ08x0LrhzvGJdPZcBK67LdJH6aKVOjICpReGz", 
+        "3kREFUqcMoaJWVLmbi9OTR8tZpGSlGt457aFCWXt",
+        "219",
         "PayPassPerso.scr"
     );
     
