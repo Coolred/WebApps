@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <?php
+    isset($ISSUER) || die("ISSUER NOT SET");
     session_start();
     $request = ($_SERVER['REQUEST_METHOD'] == 'GET') ? $_GET : $_POST;
+    $_SESSION['ISSUER'] = $ISSER;
+    
+    $cardTypeName = $ISSUER->getCardTypeName();
+    
     if(isset($request['CALLBACK'])) {
         $_SESSION['CALLBACK'] = $request['CALLBACK'];
         error_log("Callback is $_SESSION[CALLBACK]", 0);
@@ -11,7 +16,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Generic Bank Card Application</title>
+    <title><?=$cardTypeName;?> Mobile Card Application</title>
     <style>
         body {
             text-align: center;
@@ -44,6 +49,7 @@
             text-align: center;
             font-size: smaller;
             font-weight: bold;
+            margin-bottom: 0.5em;
         }
 
         fieldset {
@@ -70,7 +76,7 @@
         }
         
         /* next two are only used by jQuery */
-        .swipeYoursIssuerOnly {}
+        .defaultIssuerOnly {}
         .customIssuerOnly {}
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -80,15 +86,15 @@
             $("#form").validate();
 
             $("#useCustomIssuerButton").click(function(){
-                $(".swipeYoursIssuerOnly").hide();
+                $(".defaultIssuerOnly").hide();
                 $(".customIssuerOnly input").removeAttr('disabled').attr('required', '');
                 $(".customIssuerOnly").show();
             });
 
-            $("#useSwipeYoursButton").click(function(){
+            $("#useDefaultIssuerButton").click(function(){
                 $(".customIssuerOnly").hide();
                 $(".customIssuerOnly input").removeAttr('required').attr('disabled', '');
-                $(".swipeYoursIssuerOnly").show();
+                $(".defaultIssuerOnly").show();
             });
 
         });
@@ -97,16 +103,16 @@
 
 <body>
 <img src="/img/simplybank.png"/>
-<h2>APPLY FOR A CARD</h2>
+<h2><?=$cardTypeName;?> Mobile Card Application</h2>
     
 <form id="form" action="getRequestToken.php" method="get">
     
     <fieldset>
         <legend>GENERAL INFORMATION</legend>
             
-        <div class="fieldsetHint">Demo-only input fields. They are not editable.</div>
+        <div class="fieldsetHint">Non-editable Demo-only fields</div>
         <div>
-            <label>Last Name: <input type="text" name="lastname" value="Smith" size="10" disabled></label>
+            <label>Full Name: <input type="text" name="lastname" value="John Smith" size="10" disabled></label>
         </div>
         <div>
             <label>Email: <input type="text" name="email" value="john.smith@example.com" size="30" disabled></label>
@@ -127,27 +133,18 @@
         <div>
             <label>Zip Code: <input type="text" name="zip" value="78701" size="8" disabled></label>
         </div>
-    </fieldset>
-    <fieldset>
-        <legend>Employment</legend>
-        <div>
-            <label>Current Employer: <input type="text" name="employer" value="Big Mart" size="9" disabled></label>
-        </div>
-        <div>
-            <label>Work Phone Number: <input type="text" name="workphone" value="+1-512-555-4321" disabled></label>
-        </div>
         <div>
             <label>Annual Income: <input type="text" name="income" value="$40000" size="8" disabled></label>
         </div>
     </fieldset>
-    <div class="swipeYoursIssuerOnly">
+    <div class="defaultIssuerOnly">
         <button type="button" id="useCustomIssuerButton">Custom Issuer &darr;</button> You are using SimplyBank's SwipeYours Issuer, but can configure
         your own.
     </div>
     <fieldset class="customIssuerOnly" id="oauthFieldsSection">
         <legend>Issuer OAuth Configuration (values from Issuer section</legend>
         <div class="center">
-            <div class="swipeYoursIssuerOnly fieldsetHint">You are using SimplyBank's SwipeYours Issuer</div>
+            <div class="defaultIssuerOnly fieldsetHint">You are using SimplyBank's SwipeYours Issuer</div>
             <div class="customIssuerOnly fieldsetHint">Copy the values from the Issuer section of your
                 SimplyTapp account
             </div>
@@ -168,7 +165,7 @@
             </label>
         </div>
         <div class="customIssuerOnly">
-            <button id="useSwipeYoursButton" type="button">Hide and use SwipeYours Issuer &uarr;</button>
+            <button id="useDefaultIssuerButton" type="button">Hide and use default <?=$cardTypeName;?> Issuer &uarr;</button>
         </div>
     </fieldset>
         
