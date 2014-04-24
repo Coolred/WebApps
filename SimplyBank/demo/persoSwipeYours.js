@@ -1,7 +1,5 @@
 $(function() {
 
-    $("#tabs").tabs();
-
     function log(msg) {
         if (window.console) {
             console.log(msg);
@@ -27,9 +25,9 @@ $(function() {
     });
 
     function modifyPersonalizationScript(convertedTrackData) {
-        var text = $("#swipeYoursScript").val();
+        var text = $("#persoScript").val();
         text = text.replace(/\/send\b.*/, "/send " + convertedTrackData);
-        $("#swipeYoursScript").val(text);
+        $("#persoScript").val(text);
     }
 
 

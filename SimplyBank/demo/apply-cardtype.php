@@ -79,12 +79,14 @@
             $("#useCustomIssuerButton").click(function(){
                 $(".defaultIssuerOnly").hide();
                 $(".customIssuerOnly input").removeAttr('disabled').attr('required', '');
+                $("#form").attr("action", "getRequestTokenWithCustomIssuer.php");
                 $(".customIssuerOnly").show();
             });
 
             $("#useDefaultIssuerButton").click(function(){
                 $(".customIssuerOnly").hide();
                 $(".customIssuerOnly input").removeAttr('required').attr('disabled', '');
+                $("#form").attr("action", "getRequestToken.php");
                 $(".defaultIssuerOnly").show();
             });
 
@@ -123,9 +125,6 @@
         </div>
         <div>
             <label>Zip Code: <input type="text" name="zip" value="78701" size="8" disabled></label>
-        </div>
-        <div>
-            <label>Annual Income: <input type="text" name="income" value="$40000" size="8" disabled></label>
         </div>
     </fieldset>
     <div class="defaultIssuerOnly">

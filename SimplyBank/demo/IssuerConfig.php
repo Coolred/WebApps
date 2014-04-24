@@ -1,20 +1,26 @@
 <?php
 
 session_start();
-    
+   
 /*
  *  IssuerConfig is a singleton that stores itself in the user's session memory
  *  on the server.  Use init(...) to wipe and reset the instance and get() to
  *  retrieve the current instance. 
  */
 class IssuerConfig {
+    const REQUEST_TOKEN_URL = 'https://www.simplytapp.com/accounts/OAuthGetRequestToken?scope=CARD_OWNER';
+    const AUTH_TOKEN_URL    = 'https://www.simplytapp.com/accounts/OAuthAuthorizeToken';
+    const ACCESS_TOKEN_URL  = 'https://www.simplytapp.com/accounts/OAuthGetAccessToken';
+    
     private $cardTypeName;
     private $issuerKey;
     private $issuerSecret;
     private $brandId;
     private $persoFileName;
+    private $requestToken;
+    private $requestTokenSecret;
     private $accessToken;
-    private $accessSecret;
+    private $accessTokenSecret;
     private $applyCompletedCallback;
     
     private static $instance;
@@ -27,13 +33,17 @@ class IssuerConfig {
         $this->issuerSecret = $issuerSecret;
         $this->brandId = $brandId;
         $this->persoFileName = $persoFileName;
-        $this->accessToken  = "NOT_INITIALIZED";
-        $this->accessSecret = "NOT_INITIALIZED";
+        $this->requestToken = "NOT_SET";
+        $this->requestTokenSecret = "NOT_SET";
+        $this->accessToken  = "NOT_SET";
+        $this->accessTokenSecret = "NOT_SET";
         
         // We save the callback if it is given to us, but it's not a required
         // parameter.
-        $request = ($_SERVER['REQUEST_METHOD'] == 'GET') ? $_GET : $_POST;   
-        $this->applyCompletedCallback = $request['CALLBACK'];
+        $request = ($_SERVER['REQUEST_METHOD'] == 'GET') ? $_GET : $_POST;
+        if (isset($request['CALLBACK'])) {
+            $this->applyCompletedCallback = $request['CALLBACK'];
+        }
 
     }
     
@@ -43,13 +53,10 @@ class IssuerConfig {
         return self::$instance;
     }
     
-    public static function get($returnMockValueIfSessionExpired = false) {
+    public static function get() {
         if (!isset(self::$instance)) {
-            self::$instance = $_SESSION['IssuerConfig'];
-            if (!isset(self::$instance)) {
-                $returnMockValueIfSessionExpired || die("ISSUER NOT SET");
-                self::$instance = self::createMockInstance();
-            }
+            self::$instance = isset($_SESSION['IssuerConfig']) ?
+                $_SESSION['IssuerConfig'] : self::createMockInstance();       
         }
         return self::$instance;
     }
@@ -60,7 +67,7 @@ class IssuerConfig {
             "ISSUER_KEY_NOT_SET",
             "ISSUER_SECRET_NOT_SET",
             "-1", 
-            "/dev/null"
+            "SessionExpired.scr"
         );
     }
         
@@ -96,20 +103,36 @@ class IssuerConfig {
         return $this->persoFileName;
     }
     
-    public function getAccessKey() {
-        return $this->accessKey;
+    public function getRequestToken() {
+        return $this->requestToken;
+    }
+      
+    public function setRequestToken($requestToken) {
+        $this->requestToken = $requestToken;
     }
     
-    public function setAccessKey($accessKey) {
-        $this->accessKey = $accessKey;
+    public function getRequestTokenSecret() {
+        return $this->requestTokenSecret;
     }
     
-    public function getAccessSecret() {
-        return $this->accessSecret;
+    public function setRequestTokenSecret($requestTokenSecret) {
+        $this->requestTokenSecret = $requestTokenSecret;
     }
     
-    public function setAccessSecret($accessSecret) {
-        $this->accessSecret = $accessSecret;
+    public function getAccessToken() {
+        return $this->accessToken;
+    }
+    
+    public function setAccessToken($accessToken) {
+        $this->accessToken = $accessToken;
+    }
+    
+    public function getAccessTokenSecret() {
+        return $this->accessTokenSecret;
+    }
+    
+    public function setAccessTokenSecret($accessTokenSecret) {
+        $this->accessTokenSecret = $accessTokenSecret;
     }
 
     public function getApplyCompletedCallback() {

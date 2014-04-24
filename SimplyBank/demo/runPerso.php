@@ -1,16 +1,7 @@
 <!DOCTYPE html>
 <?php
-    session_start();
-    
-    function get_session_var($varname) { 
-        return isset($_SESSION[$varname]) ? 
-            $_SESSION[$varname] : (strtoupper($varname)."_IS_UNDEFINED");     
-    } 
-        
-    $issuer_key = get_session_var('issuer_key');
-    $issuer_secret = get_session_var('issuer_secret');   
-    $access_token = get_session_var('access_token');
-    $access_token_secret = get_session_var('access_token_secret');
+    include_once 'IssuerConfig.php';
+    $issuer = IssuerConfig::get();
     
     $script_input = "No GPJ script provided";
     $script_output = "No output available";
@@ -23,20 +14,22 @@
         fwrite($handle, $script_input);
         fclose($handle);
 
-        $command = "/usr/bin/java -jar STBridge.jar -ck $issuer_key -cs $issuer_secret"
-            . " -at $access_token -ts $access_token_secret"
-            . " -s $tmpfname 2>&1";
+        $command = "/usr/bin/java -jar STBridge.jar "
+                .  "-ck {$issuer->getIssuerKey()}   -cs {$issuer->getIssuerSecret()}"
+                . " -at {$issuer->getAccessToken()} -ts {$issuer->getAccessTokenSecret()}"
+                . " -s $tmpfname 2>&1";
         
         error_log("about to run command: $command", 0);
         
         $script_output = array();
         $return_val = null;
         exec($command, $script_output, $return_val);
+        unlink($tmpfname);
+        
         if ($script_output) {
             // convert array to string
             $script_output = implode(PHP_EOL, $script_output);
         } else {
-            unlink($tmpfname);
             error_log("We just ran STBridge command with return status '$return_val' and no output: $command");
         }
     }
