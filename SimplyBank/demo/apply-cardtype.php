@@ -1,16 +1,7 @@
 <!DOCTYPE html>
 <?php
-    isset($ISSUER) || die("ISSUER NOT SET");
-    session_start();
-    $request = ($_SERVER['REQUEST_METHOD'] == 'GET') ? $_GET : $_POST;
-    $_SESSION['ISSUER'] = $ISSER;
-    
-    $cardTypeName = $ISSUER->getCardTypeName();
-    
-    if(isset($request['CALLBACK'])) {
-        $_SESSION['CALLBACK'] = $request['CALLBACK'];
-        error_log("Callback is $_SESSION[CALLBACK]", 0);
-    }
+    include_once 'IssuerConfig.php';
+    $cardTypeName = IssuerConfig::get()->getCardTypeName();
 ?>
 <html>
 <head>
