@@ -134,9 +134,9 @@
     <fieldset class="customIssuerOnly" id="oauthFieldsSection">
         <legend>Issuer OAuth Configuration (values from Issuer section</legend>
         <div class="center">
-            <div class="defaultIssuerOnly fieldsetHint">You are using SimplyBank's SwipeYours Issuer</div>
-            <div class="customIssuerOnly fieldsetHint">Copy the values from the Issuer section of your
-                SimplyTapp account
+            <div class="defaultIssuerOnly fieldsetHint">You are using SimplyBank's <?=$cardTypeName;?> Issuer</div>
+            <div class="customIssuerOnly fieldsetHint">
+                Copy the values from the Issuer section of your SimplyTapp account
             </div>
         </div>
         <div>
