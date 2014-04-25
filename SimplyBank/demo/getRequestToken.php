@@ -7,8 +7,6 @@
 include_once 'IssuerConfig.php';
 $issuer = IssuerConfig::get();
 
-error_log("AAA: Made it here", 0);
-
 $oauth = new OAuth(
             $issuer->getIssuerKey(), 
             $issuer->getIssuerSecret(),
@@ -17,17 +15,13 @@ $oauth = new OAuth(
         );
 $oauth->enableDebug();
 
-error_log("BBB: Made it here", 0);
-
 try {
     $request_token_info = $oauth->getRequestToken(IssuerConfig::REQUEST_TOKEN_URL . "&brand_id={$issuer->getBrandId()}");
-    error_log("XXXX Made it here", 0);
     
     $request_token = $request_token_info['oauth_token'];
     $issuer->setRequestToken($request_token);
     $issuer->setRequestTokenSecret($request_token_info['oauth_token_secret']);
     
-    error_log("Location: " . IssuerConfig::AUTH_TOKEN_URL . "?oauth_token=$request_token", 0);
     header("Location: " . IssuerConfig::AUTH_TOKEN_URL . "?oauth_token=$request_token");
 
 } catch(OAuthException $ex) {
