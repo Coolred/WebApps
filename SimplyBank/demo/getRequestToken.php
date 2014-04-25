@@ -27,7 +27,8 @@ try {
     $issuer->setRequestToken($request_token);
     $issuer->setRequestTokenSecret($request_token_info['oauth_token_secret']);
     
-    header("Location: " + IssuerConfig::AUTH_TOKEN_URL . "?oauth_token=$request_token");
+    error_log("Location: " . IssuerConfig::AUTH_TOKEN_URL . "?oauth_token=$request_token", 0);
+    header("Location: " . IssuerConfig::AUTH_TOKEN_URL . "?oauth_token=$request_token");
 
 } catch(OAuthException $ex) {
     $log = $ex->getMessage() . "\n" . $ex->getTraceAsString();

@@ -125,7 +125,7 @@ $persoFileName = $issuer->getPersoFileName();
         </div>
 <?php else: ?>
         <h5>
-            Make any needed adjustments to the script below and then click "Modify Script".
+            Make any needed adjustments to the script and then click "Personalize Card".
         </h5>
 <?php endif; ?>
         
@@ -143,12 +143,12 @@ $persoFileName = $issuer->getPersoFileName();
         <legend>OAuth Request Tokens</legend>
         <table id="authTokenTable">
             <tr>
-                <th>OAuth Access Token:</th>
-                <td><?= $issuer->getAccessToken(); ?></td>
+                <th>OAuth Request Token:</th>
+                <td><?= $issuer->getRequestToken(); ?></td>
             </tr>
             <tr>
-                <th>OAuth Access Token Secret:</th>
-                <td><?= $issuer->getAccessTokenSecret(); ?></td>
+                <th>OAuth Request Token Secret:</th>
+                <td><?= $issuer->getRequestTokenSecret(); ?></td>
             </tr>
         </table>
     </fieldset>

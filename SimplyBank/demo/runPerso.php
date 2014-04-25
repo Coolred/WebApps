@@ -48,7 +48,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Run Card Personalization</title>
+    <title>Run <?=$issuer->getCardTypeName();?> Mobile Card Personalization</title>
     <style>
         body {
             text-align: center;
@@ -97,36 +97,36 @@
 
 <body>
     <img src="/img/simplybank.png"/>
-
+    
+    <fieldset>
+        <legend>GPJ Input Script</legend>
+        <code id="inputScript" class="commandOutput"><?= $script_input; ?></code>
+    </fieldset>
+    
+    <fieldset>
+        <legend>GPJ Output</legend>
+        <code class="commandOutput"><?= $script_output; ?></code>
+    </fieldset>
+    
     <fieldset>
         <legend>Personalization OAuth Tokens</legend>
         <div class="marginleft">
             <table id="authTokenTable">
                 <tr>
                     <th>OAuth Access Token:</th>
-                    <td><?php echo $access_token; ?></td>
+                    <td><?= $issuer->getAccessToken(); ?></td>
                 </tr>
                 <tr>
                     <th>OAuth Access Token Secret:</th>
-                    <td><?php echo $access_token_secret; ?></td>
+                    <td><?= $issuer->getAccessTokenSecret(); ?></td>
                 </tr>                
             </table>
         </div>
     </fieldset>
     
-    <fieldset>
-        <legend>GPJ Input Script</legend>
-        <code id="inputScript" class="commandOutput"><?php echo $script_input; ?></code>
-    </fieldset>
-    
-    <fieldset>
-        <legend>GPJ Output</legend>
-        <code class="commandOutput"><?php echo $script_output; ?></code>
-    </fieldset>
-
     <button id="finishedButton" type="button"
-            onclick="location.href='<?php echo $finishedButtonAction; ?>';">
-        <?php echo $finishedButtonText?>
+            onclick="location.href='<?= $finishedButtonAction; ?>';">
+        <?= $finishedButtonText; ?>
     </button>
 
 </body>
