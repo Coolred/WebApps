@@ -128,8 +128,8 @@
         </div>
     </fieldset>
     <div class="defaultIssuerOnly">
-        <button type="button" id="useCustomIssuerButton">Custom Issuer &darr;</button> You are using SimplyBank's SwipeYours Issuer, but can configure
-        your own.
+        <button type="button" id="useCustomIssuerButton">Custom Issuer &darr;</button> 
+        You are using SimplyBank's demo <?=$cardTypeName;?> issuer, but can configure your own.
     </div>
     <fieldset class="customIssuerOnly" id="oauthFieldsSection">
         <legend>Issuer OAuth Configuration (values from Issuer section</legend>
