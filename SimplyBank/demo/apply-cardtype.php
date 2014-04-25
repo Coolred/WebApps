@@ -98,7 +98,7 @@
 <img src="/img/simplybank.png"/>
 <h2><?=$cardTypeName;?> Mobile Card Application</h2>
     
-<form id="form" action="getRequestToken.php" method="get">
+<form id="form" action="getRequestToken.php" method="post">
     
     <fieldset>
         <legend>GENERAL INFORMATION</legend>
