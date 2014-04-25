@@ -132,7 +132,7 @@
         You are using SimplyBank's demo <?=$cardTypeName;?> issuer, but can configure your own.
     </div>
     <fieldset class="customIssuerOnly" id="oauthFieldsSection">
-        <legend>Issuer OAuth Configuration (values from Issuer section</legend>
+        <legend>Issuer OAuth Configuration</legend>
         <div class="center">
             <div class="defaultIssuerOnly fieldsetHint">You are using SimplyBank's <?=$cardTypeName;?> Issuer</div>
             <div class="customIssuerOnly fieldsetHint">
