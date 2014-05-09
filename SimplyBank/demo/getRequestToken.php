@@ -16,13 +16,13 @@ $oauth = new OAuth(
 $oauth->enableDebug();
 
 try {
-    $request_token_info = $oauth->getRequestToken(IssuerConfig::REQUEST_TOKEN_URL . "&brand_id={$issuer->getBrandId()}");
+    $request_token_info = $oauth->getRequestToken(IssuerConfig::$REQUEST_TOKEN_URL . "&brand_id={$issuer->getBrandId()}");
     
     $request_token = $request_token_info['oauth_token'];
     $issuer->setRequestToken($request_token);
     $issuer->setRequestTokenSecret($request_token_info['oauth_token_secret']);
     
-    header("Location: " . IssuerConfig::AUTH_TOKEN_URL . "?oauth_token=$request_token");
+    header("Location: " . IssuerConfig::$AUTH_TOKEN_URL . "?oauth_token=$request_token");
 
 } catch(OAuthException $ex) {
     $log = $ex->getMessage() . "\n" . $ex->getTraceAsString();

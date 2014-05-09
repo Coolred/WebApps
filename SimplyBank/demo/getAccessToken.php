@@ -32,7 +32,7 @@ $oauth->enableDebug();
 
 try {
     $oauth->setToken($issuer->getRequestToken(), $issuer->getRequestTokenSecret());    
-    $access_token_info = $oauth->getAccessToken(IssuerConfig::ACCESS_TOKEN_URL);
+    $access_token_info = $oauth->getAccessToken(IssuerConfig::$ACCESS_TOKEN_URL);
     
     $issuer->setAccessToken($access_token_info['oauth_token']);
     $issuer->setAccessTokenSecret($access_token_info['oauth_token_secret']);

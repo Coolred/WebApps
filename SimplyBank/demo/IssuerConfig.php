@@ -8,9 +8,10 @@ session_start();
  *  retrieve the current instance. 
  */
 class IssuerConfig {
-    const REQUEST_TOKEN_URL = 'https://www.simplytapp.com/accounts/OAuthGetRequestToken?scope=CARD_OWNER';
-    const AUTH_TOKEN_URL    = 'https://www.simplytapp.com/accounts/OAuthAuthorizeToken';
-    const ACCESS_TOKEN_URL  = 'https://www.simplytapp.com/accounts/OAuthGetAccessToken';
+    // static URLs are defined at the end of the file because PHP is lame.
+    public static $REQUEST_TOKEN_URL;
+    public static $AUTH_TOKEN_URL;
+    public static $ACCESS_TOKEN_URL; 
     
     private $cardTypeName;
     private $issuerKey;
@@ -144,3 +145,7 @@ class IssuerConfig {
     } 
 
 }
+
+IssuerConfig::$REQUEST_TOKEN_URL = "https://{$_SERVER['OAUTH_DOMAIN']}/accounts/OAuthGetRequestToken?scope=CARD_OWNER";
+IssuerConfig::$AUTH_TOKEN_URL    = "https://{$_SERVER['OAUTH_DOMAIN']}/accounts/OAuthAuthorizeToken";
+IssuerConfig::$ACCESS_TOKEN_URL  = "https://{$_SERVER['OAUTH_DOMAIN']}/accounts/OAuthGetAccessToken";
