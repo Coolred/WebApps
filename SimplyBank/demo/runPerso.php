@@ -17,6 +17,7 @@
         $command = "/usr/bin/java -jar STBridge.jar "
                 .  "-ck {$issuer->getIssuerKey()}   -cs {$issuer->getIssuerSecret()}"
                 . " -at {$issuer->getAccessToken()} -ts {$issuer->getAccessTokenSecret()}"
+                . " -service https://{$_SERVER['OAUTH_DOMAIN']}/accounts/Api"
                 . " -s $tmpfname 2>&1";
         
         error_log("about to run command: $command", 0);
