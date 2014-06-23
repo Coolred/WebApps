@@ -114,11 +114,11 @@
         <div class="marginleft">
             <table id="authTokenTable">
                 <tr>
-                    <th>OAuth Access Token:</th>
+                    <th>Card Access Token:</th>
                     <td><?= $issuer->getAccessToken(); ?></td>
                 </tr>
                 <tr>
-                    <th>OAuth Access Token Secret:</th>
+                    <th>Card Token Secret:</th>
                     <td><?= $issuer->getAccessTokenSecret(); ?></td>
                 </tr>                
             </table>
