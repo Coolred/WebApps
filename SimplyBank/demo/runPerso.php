@@ -110,7 +110,7 @@
     </fieldset>
     
     <fieldset>
-        <legend>Personalization OAuth Tokens</legend>
+        <legend>Card Tokens</legend>
         <div class="marginleft">
             <table id="authTokenTable">
                 <tr>
